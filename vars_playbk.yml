@@ -1,0 +1,38 @@
+---
+# YAML documents begin with the document separator ---
+ 
+# The minus in YAML this indicates a list item.  The playbook contains a list
+# of plays, with each play being a dictionary
+-
+ 
+  # Target: where our play will run and options it will run with
+  hosts: centos 
+  gather_facts: false
+
+  pre_tasks:
+    - setup:
+        gather_subset: 'local'
+
+  # Variable: variables that will apply to the play, on all target systems
+
+  # Task: the list of tasks that will be executed within the playbook
+  tasks:
+    - name: Test groupvars with an ansible fact, show that the variable is also accessible from the hostvars section
+      debug:
+        msg: "{{ hostvars[ansible_hostname].ansible_user }}"
+    
+    - name: Test groupvars
+      debug:
+        msg: "{{ ansible_user }}"
+    
+    - name: Test facts for subset distribution
+      debug:
+        msg: "{{ ansible_distribution }}"
+
+    - name: Test hostvars with an ansible fact and collect ansible_port, dot notation
+      debug:
+        msg: "{{ hostvars[ansible_hostname].ansible_host }}"
+
+
+# Three dots indicate the end of a YAML document
+...

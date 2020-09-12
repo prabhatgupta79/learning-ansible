@@ -1,0 +1,13 @@
+[control]
+ansible-controller 
+
+[centos]
+ansibletarget3
+
+[ubuntu]
+ansibletarget2
+
+[linux:children]
+control
+centos
+ubuntu

@@ -1,0 +1,21 @@
+[control]
+ansiblecontroller ansible_facts=false ansible_connection=local
+
+[centos]
+ansibletarget3 ansible_host=10.142.0.3
+
+[centos:vars]
+ansible_become=true
+ansible_user=prabhat
+
+[ubuntu]
+ansibletarget2 ansible_host=10.142.0.2
+
+[ubuntu:vars]
+ansible_user=prabhat
+ansible_become=true
+
+[linux:children]
+control
+centos
+ubuntu
